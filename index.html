@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+    <title>AI-стилист в WhatsApp — для люксовых брендов</title>
+    <meta
+      name="description"
+      content="Персональные рекомендации, актуальные остатки и рост продаж — прямо в WhatsApp."
+    />
+    <style>
+      :root {
+        --bg: #0f0e13;
+        --bg-soft: #151320;
+        --primary: #7c4dff; /* фиолетовый основной */
+        --primary-600: #6a3ef7;
+        --primary-700: #5a2fe8;
+        --accent: #b388ff; /* светло-фиолетовый */
+        --text: #eae6ff;
+        --text-dim: #b9b5d6;
+        --ok: #36d399;
+        --warn: #ffd166;
+        --card: #1a1830;
+        --border: rgba(255, 255, 255, 0.08);
+        --shadow: 0 10px 30px rgba(124, 77, 255, 0.25);
+        --radius: 16px;
+        --radius-sm: 12px;
+        --maxw: 1080px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(1200px 800px at 80% -10%, #1d1640 0%, #0f0e13 55%),
+          radial-gradient(1000px 700px at -10% 20%, #21183f 0%, #0f0e13 60%);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        max-width: var(--maxw);
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: saturate(160%) blur(6px);
+        background: linear-gradient(
+          rgba(15, 14, 19, 0.7),
+          rgba(15, 14, 19, 0.35)
+        );
+        border-bottom: 1px solid var(--border);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 68px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 700;
+        letter-spacing: 0.3px;
+        font-size: x-large;
+      }
+      .nav-cta a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        border-radius: 12px;
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: var(--shadow);
+        transition: all 0.2s ease;
+      }
+      .nav-cta a:hover {
+        background: var(--primary-600);
+        transform: translateY(-1px);
+      }
+
+      /* Hero */
+      .hero {
+        padding: 76px 0 40px;
+      }
+      .hero-wrap {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 36px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(124, 77, 255, 0.15);
+        color: var(--accent);
+        border: 1px solid var(--border);
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+      h1 {
+        font-size: clamp(32px, 5vw, 56px);
+        line-height: 1.08;
+        margin: 14px 0 12px;
+        letter-spacing: -0.4px;
+      }
+      .lead {
+        color: var(--text-dim);
+        font-size: clamp(16px, 2.1vw, 18px);
+        margin-bottom: 26px;
+      }
+      .actions {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: var(--text);
+        font-weight: 700;
+        transition: all 0.2s ease;
+      }
+      .btn.primary {
+        background: linear-gradient(135deg, var(--primary), var(--primary-700));
+        color: white;
+        box-shadow: var(--shadow);
+      }
+      .btn.primary:hover {
+        filter: brightness(1.05);
+        transform: translateY(-2px);
+      }
+      .btn.ghost:hover {
+        border-color: rgba(255, 255, 255, 0.18);
+        transform: translateY(-2px);
+      }
+
+      .hero-card {
+        border: 1px solid var(--border);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: var(--radius);
+        padding: 22px;
+        box-shadow: 0 30px 60px rgba(10, 6, 30, 0.35);
+      }
+      .phone {
+        width: 100%;
+        aspect-ratio: 9 / 16;
+        border-radius: 24px;
+        border: 1px solid var(--border);
+        background: linear-gradient(180deg, #151326, #110f1c);
+        padding: 18px;
+        position: relative;
+        overflow: hidden;
+      }
+      .bubble {
+        max-width: 78%;
+        padding: 10px 14px;
+        margin: 10px 0;
+        border-radius: 14px;
+        font-size: 14px;
+        border: 1px solid var(--border);
+      }
+      .bubble.ai {
+        background: rgba(124, 77, 255, 0.12);
+        align-self: flex-start;
+      }
+      .bubble.user {
+        background: rgba(255, 255, 255, 0.06);
+        align-self: flex-end;
+        margin-left: auto;
+      }
+      .chat {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+      }
+      .chat-feed {
+        flex: 1;
+        overflow: auto;
+        padding-right: 6px;
+      }
+      .chat-input {
+        margin-top: 8px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: center;
+      }
+      .chat-input .field {
+        height: 40px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: #121021;
+      }
+      .chat-input .send {
+        height: 40px;
+        border-radius: 12px;
+        background: var(--primary);
+        border: 0;
+        color: #fff;
+        padding: 0 14px;
+      }
+
+      /* Sections */
+      .section {
+        padding: 50px 0;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: var(--radius-sm);
+        padding: 18px;
+      }
+      .card h3 {
+        margin: 6px 0 8px;
+        font-size: 18px;
+      }
+      .muted {
+        color: var(--text-dim);
+        font-size: 15px;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 26px;
+        align-items: start;
+      }
+      .list {
+        display: grid;
+        gap: 12px;
+      }
+      .li {
+        display: grid;
+        grid-template-columns: 22px 1fr;
+        gap: 12px;
+        align-items: start;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--ok);
+        margin-top: 8px;
+      }
+      .panel {
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: var(--radius);
+        padding: 18px;
+      }
+
+      /* CTA (fixed for mobile) */
+      .cta {
+        margin: 40px auto 60px;        /* было 40px 300px 60px — ломало мобайл */
+        max-width: 920px;              /* ограничение ширины на десктопе */
+        border: 1px solid var(--border);
+        background: linear-gradient(
+          135deg,
+          rgba(124, 77, 255, 0.18),
+          rgba(124, 77, 255, 0.06)
+        );
+        border-radius: var(--radius);
+        padding: 26px;
+        text-align: center;
+        box-shadow: var(--shadow);
+      }
+      .cta h2 {
+        margin: 6px 0 10px;
+        font-size: clamp(22px, 3.2vw, 32px);
+      }
+
+      /* Integrations grid */
+      .logos {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        align-items: center;
+      }
+      .logo {
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        padding: 14px;
+        text-align: center;
+        color: var(--text-dim);
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* FAQ */
+      details {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        background: var(--card);
+      }
+      details + details {
+        margin-top: 10px;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+      summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq-a {
+        color: var(--text-dim);
+        margin-top: 8px;
+        font-size: 15px;
+      }
+
+      /* Floating WhatsApp Button (extra feature) */
+      .fab-wa {
+        position: fixed;
+        right: 16px;
+        bottom: 18px;
+        z-index: 20;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 700;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+
+      footer {
+        padding: 26px 0 40px;
+        color: var(--text-dim);
+        border-top: 1px solid var(--border);
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .logos {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 960px) {
+        .hero-wrap,
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .cta {
+          margin: 24px 16px 40px;   /* безопасные отступы на мобиле */
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <!-- ЗАМЕНИ номер один раз здесь -->
+  <body data-wa-phone="77019821177">
+    <header>
+      <div class="container nav">
+        <div class="brand">
+          <div>Trendr</div>
+        </div>
+        <div class="nav-cta">
+          <a class="wa-link" data-text="Здравствуйте! Хочу подборку в WhatsApp."
+             href="#" target="_blank" rel="noopener">
+            Написать в WhatsApp
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container hero-wrap">
+          <div>
+            <span class="eyebrow">AI‑стилист для люкс‑брендов</span>
+            <h1>Персональные рекомендации в WhatsApp — с актуальными остатками</h1>
+            <p class="lead">
+              Клиент пишет — ассистент понимает вкус, предлагает похожие модели,
+              показывает доступное сейчас. Каталог синхронизируется с 1С/SFTP/Google Drive.
+            </p>
+            <div class="actions">
+              <a class="btn primary wa-link"
+                 data-text="Здравствуйте! Хочу демо Trendr в WhatsApp."
+                 href="#" target="_blank" rel="noopener">
+                Запросить демо в WhatsApp
+              </a>
+              <a class="btn ghost" href="#features">Как это работает</a>
+            </div>
+          </div>
+
+          <div class="hero-card">
+            <div class="phone">
+              <div class="chat">
+                <div class="chat-feed">
+                  <div class="bubble user">Покажи новые сумки Jimmy Choo</div>
+                  <div class="bubble ai">
+                    Нашла 5 моделей в вашем стиле. Доступно сейчас:
+                    <br />— CINCH Medium (black, leather)
+                    <br />— BAR Hobo (buttermilk)
+                  </div>
+                  <div class="bubble user">А похожие на CINCH Medium?</div>
+                  <div class="bubble ai">
+                    Похожие к CINCH Medium:
+                    <br />• Suede Mini — $1300
+                    <br />• Red Compact — $1150
+                  </div>
+                </div>
+                <div class="chat-input">
+                  <div class="field"></div>
+                  <button class="send">Отправить</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Value props -->
+      <section class="section">
+        <div class="container cards">
+          <div class="card">
+            <h3>AI‑ассистент</h3>
+            <p class="muted">
+              Понимает запросы, стиль, бюджет. Отвечает мгновенно и без выходных.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Актуальные остатки</h3>
+            <p class="muted">
+              Синхронизация с 1С/SFTP/Google Drive. Не предлагает недоступное.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Аналитика бренда</h3>
+            <p class="muted">
+              Топ‑товары, “избранное без покупки”, VIP‑клиенты, отчёты и сигналы.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section id="features" class="section">
+        <div class="container feature-grid">
+          <div class="list">
+            <div class="li">
+              <div class="dot"></div>
+              <div>
+                <strong>Подключаем WhatsApp и каталог</strong>
+                <div class="muted">
+                  Интеграции: 1С (REST/SFTP), Google Drive/Sheets, CSV. Автообновление по расписанию.
+                </div>
+              </div>
+            </div>
+            <div class="li">
+              <div class="dot"></div>
+              <div>
+                <strong>Понимаем вкус клиента</strong>
+                <div class="muted">
+                  Учитываем просмотры, избранное, покупки, цвет/материал/категорию, средний чек.
+                </div>
+              </div>
+            </div>
+            <div class="li">
+              <div class="dot"></div>
+              <div>
+                <strong>Рекомендуем то, что “зайдёт”</strong>
+                <div class="muted">
+                  “Похожие” и “Рекомендовано для вас” — гибрид контента и семантики.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3 style="margin:6px 0 8px">Что получает бренд</h3>
+            <ul class="muted" style="margin:0; padding-left:18px">
+              <li>Рост конверсии обращений в WhatsApp</li>
+              <li>Снижение “пустых” рекомендаций</li>
+              <li>Сегменты: лояльные, заинтересованные, «смотрят, но не покупают»</li>
+              <li>Отчёты и сигналы в реальном времени</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- New: Интеграции -->
+      <section class="section">
+        <div class="container">
+          <span class="eyebrow">Интеграции</span>
+          <h2 style="margin:10px 0 12px">Подключаемся к экосистеме бренда</h2>
+          <p class="muted" style="margin-bottom:16px">
+            Импорт каталога и остатков из 1С (REST/SFTP), Google Drive/Sheets, CSV. 
+            Экспорт сегментов в CRM. Дашборд на Metabase/Superset.
+          </p>
+          <div class="logos">
+            <div class="logo">1С</div>
+            <div class="logo">Google Drive</div>
+            <div class="logo">CSV / Sheets</div>
+            <div class="logo">CRM (Salesforce/HubSpot)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- New: Фича “Стиль‑паспорт” (мини‑квиз) -->
+      <section class="section">
+        <div class="container">
+          <span class="eyebrow">Новая фича</span>
+          <h2 style="margin:10px 0 12px">Стиль‑паспорт за 30 секунд</h2>
+          <p class="muted" style="margin-bottom:12px">
+            Короткий квиз сохраняет вкусы клиента (категории, цвет, бюджет) — и сразу формирует запрос в WhatsApp для персональной подборки.
+          </p>
+          <form id="styleQuiz" class="panel" onsubmit="return false;">
+            <div class="cards" style="grid-template-columns: repeat(3,1fr); gap:14px">
+              <div class="card">
+                <h3>Категория</h3>
+                <label><input type="radio" name="cat" value="bags" checked /> Сумки</label><br />
+                <label><input type="radio" name="cat" value="shoes" /> Обувь</label><br />
+                <label><input type="radio" name="cat" value="accessories" /> Аксессуары</label>
+              </div>
+              <div class="card">
+                <h3>Цвет</h3>
+                <label><input type="radio" name="color" value="black" checked /> Черный</label><br />
+                <label><input type="radio" name="color" value="beige" /> Бежевый</label><br />
+                <label><input type="radio" name="color" value="red" /> Красный</label>
+              </div>
+              <div class="card">
+                <h3>Бюджет</h3>
+                <label><input type="radio" name="budget" value="900-1300" checked /> $900–1300</label><br />
+                <label><input type="radio" name="budget" value="1300-2000" /> $1300–2000</label><br />
+                <label><input type="radio" name="budget" value="2000+" /> $2000+</label>
+              </div>
+            </div>
+            <div class="actions" style="margin-top:14px">
+              <button class="btn primary" id="quizSend">Получить подборку в WhatsApp</button>
+              <div class="muted">Нажимая кнопку, вы отправите предзаполненный запрос в WhatsApp.</div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- CTA (fixed mobile) -->
+      <section class="cta">
+        <div class="container" style="text-align:center">
+          <span class="eyebrow">Старт за 7 дней</span>
+          <h2>Запустите AI‑стилиста в вашем WhatsApp</h2>
+          <p class="muted" style="margin-top:6px">
+            Подключим номер, синхронизируем каталог, настроим персональные рекомендации.
+          </p>
+          <div class="actions" style="justify-content:center; margin-top:12px">
+            <a class="btn primary wa-link"
+               data-text="Здравствуйте! Хочу запустить AI‑стилиста."
+               href="#" target="_blank" rel="noopener">
+              Написать в WhatsApp
+            </a>
+            <a class="btn ghost" href="mailto:hello@brand.com">Связаться по email</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="section">
+        <div class="container">
+          <span class="eyebrow">FAQ</span>
+          <h2 style="margin:10px 0 12px">Частые вопросы</h2>
+          <details>
+            <summary>Нужно ли менять 1С?</summary>
+            <div class="faq-a">
+              Нет. Достаточно выгрузки CSV/JSON на Google Drive/SFTP по расписанию или REST‑эндпойнта. Мы подстроимся.
+            </div>
+          </details>
+          <details>
+            <summary>Сколько занимает пилот?</summary>
+            <div class="faq-a">
+              Обычно 5–10 рабочих дней: подключение WhatsApp, загрузка каталога, настройка рекомендаций и дашборда.
+            </div>
+          </details>
+          <details>
+            <summary>Безопасность данных?</summary>
+            <div class="faq-a">
+              PII шифруется, доступы по ролям, opt‑in/opt‑out. Отчёты и логи — в изолированном хранилище.
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div>© 2026 Trendr</div>
+        <div class="muted">Конфиденциальность • Безопасность • Интеграции</div>
+      </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a class="fab-wa wa-link" data-text="Здравствуйте! Хочу консультацию."
+       href="#" target="_blank" rel="noopener">WhatsApp</a>
+
+    <script>
+      // Подставляем номер во все ссылки с классом .wa-link и добавляем предзаполненный текст
+      (function () {
+        const phone = document.body.dataset.waPhone || "";
+        if (!phone) return;
+        const links = document.querySelectorAll(".wa-link");
+        links.forEach((a) => {
+          const text = a.getAttribute("data-text") || "Здравствуйте!";
+          const url =
+            "https://wa.me/" + phone + "?text=" + encodeURIComponent(text);
+          a.setAttribute("href", url);
+        });
+      })();
+
+      // Мини‑квиз “Стиль‑паспорт” → сформировать текст и открыть WhatsApp
+      (function () {
+        const btn = document.getElementById("quizSend");
+        if (!btn) return;
+        btn.addEventListener("click", function () {
+          const phone = document.body.dataset.waPhone || "";
+          const form = document.getElementById("styleQuiz");
+          const cat = (form.querySelector('input[name="cat"]:checked') || {}).value || "bags";
+          const color = (form.querySelector('input[name="color"]:checked') || {}).value || "black";
+          const budget = (form.querySelector('input[name="budget"]:checked') || {}).value || "900-1300";
+          const txt =
+            "Хочу персональную подборку.\nКатегория: " +
+            cat +
+            "\nЦвет: " +
+            color +
+            "\nБюджет: " +
+            budget;
+          const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(txt);
+          window.open(url, "_blank");
+        });
+      })();
+    </script>
+  </body>
+</html>
